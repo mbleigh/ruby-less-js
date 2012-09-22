@@ -24,6 +24,7 @@ module LessJs
 
     def self.context
       @context ||= ExecJS.compile <<-EOS
+        var window = undefined;
         var exports = {};
         
         #{contents}
