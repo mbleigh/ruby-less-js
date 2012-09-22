@@ -24,14 +24,13 @@ module LessJs
 
     def self.context
       @context ||= ExecJS.compile <<-EOS
-        var window = undefined;
-        var exports = {};
+        var window = {location: {href: "", protocol: "http", host: ""}};
         
         #{contents}
 
         function compile(data) {
           var result;
-          new exports.Parser().parse(data, function(error, tree) {
+          new window.less.Parser().parse(data, function(error, tree) {
             result = [error, tree.toCSS()];
           });
           return result;
